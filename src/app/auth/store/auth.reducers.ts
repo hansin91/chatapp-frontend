@@ -12,7 +12,7 @@ const initialState: State = {
 	users: [],
 	error: '',
 	isLoading: null,
-	isAuthenticated: null
+	isAuthenticated: false
 };
 
 export function reducer(state = initialState, action: AuthActions): State {
@@ -55,15 +55,38 @@ export function reducer(state = initialState, action: AuthActions): State {
 				error: '',
 				isLoading: false
 			};
+		case AuthActionTypes.Authenticate:
+			return {
+				...state,
+				isAuthenticated: false
+			};
 		case AuthActionTypes.AuthenticateFailed:
+			console.log(action.payload);
 			return {
 				...state,
 				isAuthenticated: false
 			};
 		case AuthActionTypes.AuthenticateSuccess:
+			console.log(action.payload);
 			return {
 				...state,
 				isAuthenticated: true
+			};
+		case AuthActionTypes.Logout:
+			return {
+				...state,
+				isAuthenticated: false
+			};
+		case AuthActionTypes.LogoutFailed:
+			return {
+				...state,
+				isAuthenticated: true,
+				error: action.payload.error
+			};
+		case AuthActionTypes.LogoutSuccess:
+			return {
+				...state,
+				isAuthenticated: false
 			};
 		default:
 			return state;

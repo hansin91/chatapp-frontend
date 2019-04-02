@@ -18,17 +18,23 @@ export class SocialAppGuard implements CanActivate {
 		private tokenService: TokenService
 	) {}
 	isAuthenticated: boolean;
+	token: string;
 
 	canActivate(
 		next: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot
 	): Observable<boolean> | Promise<boolean> | boolean {
-		this.isAuthenticated = this.state.value.auth.isAuthenticated;
-		if (this.isAuthenticated) {
-			return true;
+		this.token = this.tokenService.getToken();
+		if (this.token) {
+			return this.authService.isAuthenticated({ token: this.token }).pipe(
+				map((data) => {
+					if (data) {
+						return true;
+					}
+				})
+			);
 		} else {
 			this.router.navigate([ '/login' ]);
-			return false;
 		}
 	}
 }

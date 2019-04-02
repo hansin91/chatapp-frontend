@@ -10,9 +10,8 @@ import { TokenService } from './services/token.service';
 	styleUrls: [ './app.component.scss' ]
 })
 export class AppComponent {
-	constructor(private store: Store<fromAuth.State>, private tokenService: TokenService) {
-		this.store.dispatch(new authActions.Authenticated({ token: this.tokenService.getToken() || '' }));
-	}
+	private token: string;
+	constructor(private store: Store<fromAuth.State>, private tokenService: TokenService) {}
 
 	title = 'chatAPP';
 }

@@ -25,4 +25,8 @@ export class AuthService {
 		const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 		return this.http.post<User>(this.authUrl + '/validate', payload, { headers: headers });
 	}
+
+	logout(): Observable<boolean> {
+		return this.tokenService.deleteToken();
+	}
 }

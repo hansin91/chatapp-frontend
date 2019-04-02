@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { mergeMap, catchError, map, tap } from 'rxjs/operators';
+import { mergeMap, catchError, map, tap, withLatestFrom } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 import * as authActions from './auth.actions';
-import { Observable, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { User } from '../models/user';
 import * as fromRoot from '../../store';
 import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import * as fromAuth from '../store';
 
 @Injectable()
 export class AuthEffects {
@@ -15,7 +17,8 @@ export class AuthEffects {
 		private action$: Actions,
 		private router: Router,
 		private authService: AuthService,
-		private tokenService: TokenService
+		private tokenService: TokenService,
+		private store: Store<fromAuth.State>
 	) {}
 
 	@Effect()
@@ -79,5 +82,30 @@ export class AuthEffects {
 					catchError((err) => of(new authActions.AuthenticatedFailed(err)))
 				)
 		)
+	);
+
+	@Effect()
+	logoutUser$: Observable<any> = this.action$.pipe(
+		ofType(authActions.AuthActionTypes.Logout),
+		map((action: authActions.Logout) => action),
+		mergeMap(() =>
+			this.authService
+				.logout()
+				.pipe(
+					map((data) => new authActions.LogoutSuccess(data)),
+					catchError((err) => of(new authActions.LogoutFailed(err)))
+				)
+		)
+	);
+
+	@Effect()
+	logoutSuccess$ = this.action$.pipe(
+		ofType(authActions.AuthActionTypes.LogoutSuccess),
+		map((action: authActions.LogoutSuccess) => action.payload),
+		map(() => {
+			return new fromRoot.Go({
+				path: [ '/' ]
+			});
+		})
 	);
 }

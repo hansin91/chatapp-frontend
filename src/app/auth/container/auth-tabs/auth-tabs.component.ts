@@ -27,7 +27,6 @@ export class AuthTabsComponent implements OnInit {
 
 	errorMessage$: Observable<string>;
 	isLoading$: Observable<boolean>;
-	isAuthenticated$: Observable<boolean>;
 
 	ngOnInit() {
 		const tabs = document.querySelector('.tabs');

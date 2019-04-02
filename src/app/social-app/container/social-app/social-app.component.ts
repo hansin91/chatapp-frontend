@@ -23,4 +23,8 @@ export class SocialAppComponent implements OnInit {
 	ngOnInit() {
 		this.isAuhenticated$ = this.store.pipe(select(fromAuth.getAuthenticated));
 	}
+
+	logoutUser() {
+		this.store.dispatch(new authActions.Logout());
+	}
 }

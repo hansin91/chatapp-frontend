@@ -10,7 +10,10 @@ export enum AuthActionTypes {
 	LoginFailed = '[Auth] Login Failed',
 	Authenticate = '[Auth] Authenticate',
 	AuthenticateFailed = '[Auth] Authenticate Failed',
-	AuthenticateSuccess = '[Auth] Authenticate Success'
+	AuthenticateSuccess = '[Auth] Authenticate Success',
+	Logout = '[Auth] Logout',
+	LogoutSuccess = '[Auth] Logout Success',
+	LogoutFailed = '[Auth] Logout Failed'
 }
 
 export class Register implements Action {
@@ -58,6 +61,20 @@ export class AuthenticatedFailed implements Action {
 	constructor(public payload: any) {}
 }
 
+export class Logout implements Action {
+	readonly type = AuthActionTypes.Logout;
+}
+
+export class LogoutFailed implements Action {
+	readonly type = AuthActionTypes.LogoutFailed;
+	constructor(public payload: any) {}
+}
+
+export class LogoutSuccess implements Action {
+	readonly type = AuthActionTypes.LogoutSuccess;
+	constructor(public payload: any) {}
+}
+
 export type AuthActions =
 	| Register
 	| RegisterFailed
@@ -67,4 +84,7 @@ export type AuthActions =
 	| LoginFailed
 	| Authenticated
 	| AuthenticatedFailed
-	| AuthenticatedSucces;
+	| AuthenticatedSucces
+	| Logout
+	| LogoutFailed
+	| LogoutSuccess;
