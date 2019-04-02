@@ -1,0 +1,15 @@
+.login__form {
+	&--wrapper {
+		padding: 0 15%;
+	}
+}
+
+.not-acount {
+	float: right;
+	a {
+		color: #000;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}

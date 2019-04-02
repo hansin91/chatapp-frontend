@@ -1,0 +1,14 @@
+$errorColor: #f44336;
+
+.material-icons {
+	line-height: inherit;
+}
+
+.error {
+	color: $errorColor !important;
+}
+
+.alert-error {
+	background-color: $errorColor !important;
+	color: #fff;
+}

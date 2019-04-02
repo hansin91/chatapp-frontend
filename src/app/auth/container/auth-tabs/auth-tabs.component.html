@@ -1,0 +1,18 @@
+<app-toolbar></app-toolbar>
+
+<div class="heading" *ngIf="isLogin!==undefined">
+  <div class="heading__text">
+    <i *ngIf="isLogin" class="material-icons icon">assignment_ind</i>
+    <i *ngIf="!isLogin" class="material-icons icon">account_circle</i>
+    <h3 class="heading__title">{{ heading }}</h3>
+  </div>
+</div>
+
+<div class="container" *ngIf="isLogin!==undefined">
+  <div class="login-register">
+    <app-login *ngIf="isLogin" [isLoading]="isLoading$ | async" [errorMessage]="errorMessage$ | async" (login)="loginUser($event)"></app-login>
+    <app-register *ngIf="!isLogin" [isLoading]="isLoading$ | async" [errorMessage]="errorMessage$ | async" (register)="registerUser($event)"></app-register>
+  </div>
+</div>
+
+

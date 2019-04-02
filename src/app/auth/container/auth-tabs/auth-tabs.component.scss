@@ -1,0 +1,25 @@
+.login-register {
+	padding-top: 1rem;
+}
+
+.icon {
+	padding-right: 0.5rem;
+}
+
+.heading {
+	text-align: center;
+	padding: 2rem 0;
+	&__text {
+		display: flex;
+		justify-content: center;
+		justify-items: center;
+	}
+	h2,
+	h3 {
+		margin: 0;
+	}
+
+	h3 {
+		font-size: 2rem;
+	}
+}

@@ -1,0 +1,28 @@
+<div class="login__form">
+    <div class="row login__form--wrapper">
+      <form class="col s12" [formGroup]="loginForm" (ngSubmit)="loginUser()">
+        <div *ngIf="errorMessage" class="card-panel alert-error">
+          {{ errorMessage }}
+        </div>
+        <div *ngIf="isLoading" class="progress">
+          <div class="indeterminate"></div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="user_name" formControlName="username" type="text">
+            <label for="user_name">Username</label>
+            <span *ngIf="f.username.touched && f.username.errors && f.username.errors.required" class="helper-text error">Username is required</span>
+          </div>
+          <div class="input-field col s12">
+            <input id="password" formControlName="password" type="password">
+            <label for="password">Password</label>
+            <span *ngIf="f.password.touched && f.password.errors && f.password.errors.required" class="helper-text error">Password is required</span>
+          </div>
+          <button [disabled]="!loginForm.valid" class="btn" type="submit" name="action">Login
+            <i class="material-icons right">send</i>
+          </button>
+          <span class="right-align not-acount"><a routerLink="/register">Not have an account ? Register here</a></span>
+        </div>
+      </form>
+    </div>
+  </div>

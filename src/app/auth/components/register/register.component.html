@@ -1,0 +1,36 @@
+<div class="register__form">
+  <div class="row register__form--wrapper">
+    <form class="col s12" [formGroup]="registerForm" (ngSubmit)="save()">
+      <div *ngIf="errorMessage" class="card-panel alert-error">
+        {{ errorMessage }}
+      </div>
+      <div *ngIf="isLoading" class="progress">
+        <div class="indeterminate"></div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="user_name" formControlName="username" type="text">
+          <label for="user_name">Username</label>
+          <span *ngIf="f.username.touched && f.username.errors && f.username.errors.required" class="helper-text error">Username is required</span>
+          <span *ngIf="f.username.touched && f.username.errors && f.username.errors.minlength" class="helper-text error">Min length is {{  f.username.errors.minlength.requiredLength }}</span>
+        </div>
+        <div class="input-field col s12">
+          <input id="email" formControlName="email" type="email">
+          <label for="email">Email</label>
+          <span *ngIf="f.email.touched && f.email.errors && f.email.errors.required" class="helper-text error">Email is required</span>
+          <span *ngIf="f.email.touched && f.email.errors && f.email.errors.email" class="helper-text error">Email is not valid</span>
+        </div>
+        <div class="input-field col s12">
+          <input id="password" formControlName="password" type="password">
+          <label for="password">Password</label>
+          <span *ngIf="f.password.touched && f.password.errors && f.password.errors.required" class="helper-text error">Password is required</span>
+          <span *ngIf="f.password.touched && f.password.errors && f.password.errors.minlength" class="helper-text error">Min length is {{ f.password.errors.minlength.requiredLength }}</span>
+        </div>
+        <button [disabled]="!registerForm.valid" class="btn" type="submit" name="action">Register
+          <i class="material-icons right">send</i>
+        </button>
+        <span class="right-align have-acount"><a routerLink="/login">Already have an account ?</a></span>
+      </div>
+    </form>
+  </div>
+</div>

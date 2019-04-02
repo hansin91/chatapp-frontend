@@ -1,0 +1,41 @@
+.nav {
+	&-wrapper {
+		background-color: #000;
+		.brand-logo {
+			position: inherit;
+			cursor: pointer;
+		}
+	}
+
+	&-flex {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&-logo {
+		padding: 0 1.5rem;
+	}
+
+	&-menu {
+		ul {
+			display: inline-block;
+			li {
+				a {
+					display: inline-block;
+					padding: 0 1.5rem;
+					&:hover {
+						background: #ff0266;
+						opacity: 1; /* css standard */
+						filter: alpha(opacity=100);
+					}
+				}
+			}
+		}
+	}
+}
+
+.btn {
+	&-login__register {
+		background: #ff4f94;
+	}
+}
