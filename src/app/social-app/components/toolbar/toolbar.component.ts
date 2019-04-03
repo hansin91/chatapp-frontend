@@ -6,13 +6,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 	styleUrls: [ './toolbar.component.scss' ]
 })
 export class ToolbarComponent implements OnInit {
-	@Input() isAuthenticated: boolean;
 	@Output() logout = new EventEmitter<void>();
 	constructor() {}
 
-	ngOnInit() {
-		console.log(this.isAuthenticated);
-	}
+	ngOnInit() {}
 
 	logoutUser() {
 		this.logout.emit();

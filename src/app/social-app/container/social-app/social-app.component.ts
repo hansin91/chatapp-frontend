@@ -18,11 +18,7 @@ export class SocialAppComponent implements OnInit {
 		private tokenService: TokenService
 	) {}
 
-	isAuhenticated$: Observable<boolean>;
-
-	ngOnInit() {
-		this.isAuhenticated$ = this.store.pipe(select(fromAuth.getAuthenticated));
-	}
+	ngOnInit() {}
 
 	logoutUser() {
 		this.store.dispatch(new authActions.Logout());
