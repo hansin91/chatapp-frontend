@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select, State } from '@ngrx/store';
-import { map, take } from 'rxjs/operators';
+import { Store, State, select } from '@ngrx/store';
 import * as fromAuth from '../../../auth/store';
+import * as fromMenu from '../../store/menu';
 import * as authActions from '../../../auth/store/auth.actions';
+import * as menuActions from '../../store/menu/menu.actions';
 import { TokenService } from 'src/app/services/token.service';
-import { pipe, from, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { Menu } from '../../store/menu/menu.model';
 
 @Component({
 	selector: 'app-social-app',
@@ -12,13 +14,14 @@ import { pipe, from, Observable } from 'rxjs';
 	styleUrls: [ './social-app.component.scss' ]
 })
 export class SocialAppComponent implements OnInit {
-	constructor(
-		private store: Store<fromAuth.State>,
-		private state: State<fromAuth.State>,
-		private tokenService: TokenService
-	) {}
+	constructor(private store: Store<fromAuth.State>) {}
 
-	ngOnInit() {}
+	sideMenus$: Observable<Menu[]>;
+
+	ngOnInit() {
+		this.store.dispatch(new menuActions.LoadSideMenu());
+		this.sideMenus$ = this.store.pipe(select(fromMenu.getMenu));
+	}
 
 	logoutUser() {
 		this.store.dispatch(new authActions.Logout());

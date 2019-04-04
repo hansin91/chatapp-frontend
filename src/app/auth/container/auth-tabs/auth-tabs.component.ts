@@ -16,12 +16,7 @@ import { AuthService } from '../../auth.service';
 	styleUrls: [ './auth-tabs.component.scss' ]
 })
 export class AuthTabsComponent implements OnInit {
-	constructor(
-		private router: Router,
-		private authService: AuthService,
-		private store: Store<fromAuth.State>,
-		private tokenService: TokenService
-	) {}
+	constructor(private router: Router, private store: Store<fromAuth.State>) {}
 	private isLogin: boolean;
 	private heading: string;
 

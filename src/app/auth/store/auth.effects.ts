@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { mergeMap, catchError, map, tap, withLatestFrom } from 'rxjs/operators';
+import { mergeMap, catchError, map, withLatestFrom } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 import * as authActions from './auth.actions';
-import { Observable, of, from } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { User } from '../models/user';
 import * as fromRoot from '../../store';
 import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import * as fromAuth from '../store';
 
 @Injectable()
@@ -102,10 +102,12 @@ export class AuthEffects {
 	logoutSuccess$ = this.action$.pipe(
 		ofType(authActions.AuthActionTypes.LogoutSuccess),
 		map((action: authActions.LogoutSuccess) => action.payload),
-		map(() => {
-			return new fromRoot.Go({
-				path: [ '/' ]
-			});
+		map((payload) => {
+			if (payload) {
+				return new fromRoot.Go({
+					path: [ '/' ]
+				});
+			}
 		})
 	);
 }

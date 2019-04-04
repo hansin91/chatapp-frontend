@@ -1,4 +1,4 @@
-import { AuthActions, AuthActionTypes, AuthenticatedFailed } from './auth.actions';
+import { AuthActions, AuthActionTypes } from './auth.actions';
 import { User } from '../models/user';
 
 export interface State {
@@ -61,13 +61,11 @@ export function reducer(state = initialState, action: AuthActions): State {
 				isAuthenticated: false
 			};
 		case AuthActionTypes.AuthenticateFailed:
-			console.log(action.payload);
 			return {
 				...state,
 				isAuthenticated: false
 			};
 		case AuthActionTypes.AuthenticateSuccess:
-			console.log(action.payload);
 			return {
 				...state,
 				isAuthenticated: true

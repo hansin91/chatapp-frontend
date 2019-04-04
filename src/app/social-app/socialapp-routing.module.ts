@@ -3,16 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { SocialAppComponent } from './container/social-app/social-app.component';
 import { SocialAppGuard } from './socialapp.guard';
 
-const socialAppRoutes: Routes = [
+const routes: Routes = [
 	{
-		path: 'socialapp',
+		path: '',
 		component: SocialAppComponent,
 		canActivate: [ SocialAppGuard ]
 	}
 ];
 
 @NgModule({
-	imports: [ RouterModule.forChild(socialAppRoutes) ],
-	exports: [ RouterModule ]
+	imports: [ RouterModule.forChild(routes) ],
+	exports: [ RouterModule ],
+	providers: [ SocialAppGuard ]
 })
 export class SocialAppRoutingModule {}
